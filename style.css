@@ -1,0 +1,44 @@
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(6, 100px);
+    background-color: gray;
+    grid-template-areas: 
+    "display display display display"
+    "clear divide multiply subtract"
+    "7 8 9 add"
+    "4 5 6 equals"
+    "1 2 3 equals"
+    "zero zero decimal equals";
+    width: 415px;
+    grid-gap: 5px;
+    padding: 5px;
+}
+
+#display {
+    grid-area: display;
+    background-color: whitesmoke;
+    margin: 5px;
+    margin-bottom: 0;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 50px;
+}
+
+#equals {
+    grid-area: equals;
+}
+
+#zero {
+    grid-area: zero;
+}
+
+button, p {
+    font-size: 30px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+}
