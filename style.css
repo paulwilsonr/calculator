@@ -5,9 +5,9 @@
     background-color: gray;
     grid-template-areas: 
     "display display display display"
-    "clear divide multiply subtract"
-    "7 8 9 add"
-    "4 5 6 equals"
+    "clear backspace divide multiply"
+    "7 8 9 subtract"
+    "4 5 6 add"
     "1 2 3 equals"
     "zero zero decimal equals";
     width: 415px;

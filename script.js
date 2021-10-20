@@ -1,5 +1,5 @@
 let displayValue = '';
-let values = [];
+let values = ['', '', ''];
 let isThisFirstNumber = true;
 
 
@@ -26,20 +26,22 @@ function fillDisplay() {
 
 function operate(arr) {
     switch(arr[1]) {
-    case '+':
+    case 'add':
         return add(arr[0], arr[2]);
         break;
-    case '-':
+    case 'subtract':
         return subtract(arr[0], arr[2]);
         break;
-    case '*':
+    case 'multiply':
         return multiply(arr[0], arr[2]);
         break;
-    case '/':
-        return add(arr[0], arr[2]);
+    case 'divide':
+        return divide(arr[0], arr[2]);
         break;
     default:
-        console.log("oopsie woopsie")
+        console.log("oopsie woopsie");
+        clear();
+        break;
     };
 };
 
@@ -51,33 +53,39 @@ function changeDisplay(x) {
 function clear() {
     displayValue = '';
     fillDisplay();
-    isThisFirstNumber = true;
+    values = ['', '', ''];
 }
 
-function findSolution(opperator) {
-    if (isThisFirstNumber) {
+function backspace () {
+    displayValue = displayValue.slice(0, -1);
+    fillDisplay();
+}
+
+function findSolution(operator) {
+    if (values[0] == '') {
         values[0] = Number(displayValue);
-        values[1] = opperator;
+        values[1] = operator;
         displayValue = '';
-        isThisFirstNumber = false;
-    } else if (opperator == 'equals') {
+    } else if (operator == 'equals') {
         values[2] = Number(displayValue);
         displayValue = operate(values);
         fillDisplay();
         values[0] = Number(displayValue);
-        values[2] = 0;
+        values[2] = '';
+        values[1] = '';
         displayValue = '';
-    } else {
+    } else if (displayValue == ''){
+        values[1] = operator;
+    }else {
         values[2] = Number(displayValue);
         displayValue = operate(values);
         fillDisplay();
         values[0] = displayValue;
-        values[1] = opperator;
-        values[2] = 0;
-        displayValue = '';
-        
-    }
-}
+        values[1] = operator;
+        values[2] = '';
+        displayValue = ''; 
+        }
+} 
 
 document.getElementById('clear').addEventListener('click', clear);
 document.getElementById('zero').addEventListener('click', function() {changeDisplay('0')});
@@ -90,11 +98,12 @@ document.getElementById('six').addEventListener('click', function() {changeDispl
 document.getElementById('seven').addEventListener('click', function() {changeDisplay('7')});
 document.getElementById('eight').addEventListener('click', function() {changeDisplay('8')});
 document.getElementById('nine').addEventListener('click', function() {changeDisplay('9')});
-document.getElementById('add').addEventListener('click', function() {findSolution('+')});
-document.getElementById('subtract').addEventListener('click', function() {findSolution('-')});
-document.getElementById('multiply').addEventListener('click', function() {findSolution('*')});
-document.getElementById('divide').addEventListener('click', function() {findSolution('/')});
-document.getElementById('decimal').addEventListener('click', function() {findSolution('.')});
+document.getElementById('add').addEventListener('click', function() {findSolution('add')});
+document.getElementById('subtract').addEventListener('click', function() {findSolution('subtract')});
+document.getElementById('multiply').addEventListener('click', function() {findSolution('multiply')});
+document.getElementById('divide').addEventListener('click', function() {findSolution('divide')});
+document.getElementById('decimal').addEventListener('click', function() {changeDisplay('.')});
 document.getElementById('equals').addEventListener('click', function() {findSolution('equals')});
+document.getElementById('backspace').addEventListener('click', backspace);
 
 fillDisplay();
